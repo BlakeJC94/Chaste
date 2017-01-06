@@ -51,8 +51,7 @@ template<unsigned ELEMENT_DIM, unsigned SPACE_DIM>
 double CellProliferativeTypesWriter<ELEMENT_DIM, SPACE_DIM>::GetCellDataForVtkOutput(CellPtr pCell, AbstractCellPopulation<ELEMENT_DIM, SPACE_DIM>* pCellPopulation)
 {
     double colour = pCell->GetCellProliferativeType()->GetColour();
-    
-    /*
+
     // Set colour dependent on cell mutation state
     if (!pCell->GetMutationState()->IsType<WildTypeCellMutationState>())
     {
@@ -69,7 +68,6 @@ double CellProliferativeTypesWriter<ELEMENT_DIM, SPACE_DIM>::GetCellDataForVtkOu
         ///\todo: replace this hard-coded 6 with the ApoptoticCellProperty member mColour?
         colour = 6.0;
     }
-    */
 
     return colour;
 }
@@ -78,8 +76,7 @@ template<unsigned ELEMENT_DIM, unsigned SPACE_DIM>
 void CellProliferativeTypesWriter<ELEMENT_DIM, SPACE_DIM>::VisitCell(CellPtr pCell, AbstractCellPopulation<ELEMENT_DIM, SPACE_DIM>* pCellPopulation)
 {
     unsigned colour = pCell->GetCellProliferativeType()->GetColour();
-    
-    /*
+
     // Set colour dependent on cell mutation state
     if (!pCell->GetMutationState()->IsType<WildTypeCellMutationState>())
     {
@@ -96,7 +93,6 @@ void CellProliferativeTypesWriter<ELEMENT_DIM, SPACE_DIM>::VisitCell(CellPtr pCe
         ///\todo: replace this hard-coded 6 with the ApoptoticCellProperty member mColour? (#2512)
         colour = 6;
     }
-    */
 
     *this->mpOutStream << colour << " ";
 }
