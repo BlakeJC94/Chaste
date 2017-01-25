@@ -40,9 +40,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "Warnings.hpp"
 #include "WildTypeCellMutationState.hpp"
 
-#include "projects/BlakeC/src/cell/properties/mutations/AttachedCellMutationState.hpp"
-#include "Debug.hpp"
-
 template<unsigned ELEMENT_DIM, unsigned SPACE_DIM>
 AbstractCentreBasedCellPopulation<ELEMENT_DIM, SPACE_DIM>::AbstractCentreBasedCellPopulation( AbstractMesh<ELEMENT_DIM, SPACE_DIM>& rMesh,
                                                                     std::vector<CellPtr>& rCells,
@@ -213,16 +210,14 @@ double AbstractCentreBasedCellPopulation<ELEMENT_DIM, SPACE_DIM>::GetDampingCons
     }
     else
     {
-        
         CellPtr p_cell = this->GetCellUsingLocationIndex(nodeIndex);
-        // Hack for UtericBudSimualtion so only attached cells to have mutant damping const.
-        if (p_cell->GetMutationState()->IsType<AttachedCellMutationState>())
+        if (p_cell->GetMutationState()->IsType<WildTypeCellMutationState>())
         {
-            return this->GetDampingConstantMutant();
+            return this->GetDampingConstantNormal();
         }
         else
         {
-            return this->GetDampingConstantNormal();
+            return this->GetDampingConstantMutant();
         }
     }
 }
