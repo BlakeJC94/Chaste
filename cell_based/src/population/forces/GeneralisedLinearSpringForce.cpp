@@ -36,6 +36,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "GeneralisedLinearSpringForce.hpp"
 #include "IsNan.hpp"
 
+#include "Debug.hpp"
+
 template<unsigned ELEMENT_DIM, unsigned SPACE_DIM>
 GeneralisedLinearSpringForce<ELEMENT_DIM,SPACE_DIM>::GeneralisedLinearSpringForce()
    : AbstractTwoBodyInteractionForce<ELEMENT_DIM,SPACE_DIM>(),
@@ -204,7 +206,7 @@ c_vector<double, SPACE_DIM> GeneralisedLinearSpringForce<ELEMENT_DIM,SPACE_DIM>:
     bool is_closer_than_rest_length = (overlap <= 0);
     double multiplication_factor = VariableSpringConstantMultiplicationFactor(nodeAGlobalIndex, nodeBGlobalIndex, rCellPopulation, is_closer_than_rest_length);
     double spring_stiffness = mMeinekeSpringStiffness;
-
+        
     if (bool(dynamic_cast<MeshBasedCellPopulation<ELEMENT_DIM,SPACE_DIM>*>(&rCellPopulation)))
     {
         return multiplication_factor * spring_stiffness * unit_difference * overlap;
